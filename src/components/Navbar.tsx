@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Home, Info, Star, PhoneCall, Mail, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileDrawer from "@/components/MobileDrawer";
+import messages from "./messages/en.json";
 
 export default function Navbar() {
   return (
@@ -31,31 +32,31 @@ export default function Navbar() {
             href="#sobre-mi"
             className="flex items-center gap-1 hover:text-yellow-400 transition"
           >
-            <Home size={16} /> Inicio
+            <Home size={16} /> {messages.navbar.links.home}
           </Link>
           <Link
             href="#guias"
             className="flex items-center gap-1 hover:text-yellow-400 transition"
           >
-            <Info size={16} /> Sobre Nosotros
+            <Info size={16} /> {messages.navbar.links.about}
           </Link>
           <Link
             href="#testimonios"
             className="flex items-center gap-1 hover:text-yellow-400 transition"
           >
-            <Star size={16} /> Testimonios
+            <Star size={16} /> {messages.navbar.links.testimonials}
           </Link>
           <Link
             href="#elegirnos"
             className="flex items-center gap-1 hover:text-yellow-400 transition"
           >
-            <Globe size={16} /> ¿Por qué elegirnos?
+            <Globe size={16} /> {messages.navbar.links.whyUs}
           </Link>
           <Link
             href="#contacto"
             className="flex items-center gap-1 hover:text-yellow-400 transition"
           >
-            <PhoneCall size={16} /> ¡Contáctanos!
+            <PhoneCall size={16} /> {messages.navbar.links.contact}
           </Link>
         </nav>
 
@@ -71,13 +72,13 @@ export default function Navbar() {
               alert("Lógica para cambiar idioma: ES / EN");
             }}
           >
-            <Globe size={14} /> ES / EN
+            <Globe size={14} /> {messages.navbar.buttons.language}
           </motion.button>
 
           {/* Botón contacto (desktop) */}
           <Link href="#contacto" className="hidden md:inline">
             <button className="flex items-center gap-2 text-sm bg-yellow-500 text-black px-4 py-2 rounded-full transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-yellow-400">
-              <Mail size={16} /> Contáctanos
+              <Mail size={16} /> {messages.navbar.buttons.contact}
             </button>
           </Link>
 

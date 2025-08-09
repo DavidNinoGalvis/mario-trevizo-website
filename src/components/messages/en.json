@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "name": "Mario Trevizo",
+    "title": "High-Quality Concrete Solutions",
+    "description": "Over 20 years of experience in durable platforms, pavements, and industrial flooring.",
+    "cta": "Request a quote"
+  },
+  "navbar": {
+    "links": {
+      "home": "Home",
+      "about": "About Us",
+      "testimonials": "Testimonials",
+      "whyUs": "Why Choose Us?",
+      "contact": "Contact Us!"
+    },
+    "buttons": {
+      "language": "EN / ES",
+      "contact": "Contact Us"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "items": [
+      {
+        "title": "Concrete Pavements",
+        "description": "Construction of resistant and durable pavements for roads, parking lots, and industrial areas."
+      },
+      {
+        "title": "Urban Sidewalks",
+        "description": "Design and construction of accessible, aesthetic, and safe sidewalks for the city."
+      },
+      {
+        "title": "Track Plates",
+        "description": "Efficient solutions for rural roads and hard-to-access areas."
+      },
+      {
+        "title": "Industrial Flooring",
+        "description": "High-resistance floors ideal for warehouses, factories, and workshops."
+      }
+    ]
+  }
+}

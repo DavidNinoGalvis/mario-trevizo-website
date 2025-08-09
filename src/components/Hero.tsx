@@ -3,12 +3,13 @@
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import messages from "./messages/en.json";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    videoRef.current
+    videoRef.current 
       ?.play()
       .catch((err) =>
         console.warn("Video no pudo reproducirse automáticamente:", err)
@@ -41,16 +42,19 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Mario Trevizo
+          {messages.hero.name}
         </motion.div>
+        
+        {/* Barra divisoria amarilla */}
         <div className="w-24 h-[2px] bg-yellow-500 rounded-full mb-6" />
+        
         <motion.h1
           className="text-4xl md:text-5xl font-extrabold mb-4"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Soluciones en Concreto de Alta Calidad
+          {messages.hero.title}
         </motion.h1>
 
         <motion.p
@@ -59,8 +63,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Más de 20 años de experiencia en andenes, pavimentos y pisos
-          industriales duraderos.
+          {messages.hero.description}
         </motion.p>
 
         <motion.div
@@ -70,7 +73,7 @@ export default function Hero() {
         >
           <Link href="#contacto">
             <button className="bg-yellow-500 text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-yellow-400 transition-transform hover:scale-105">
-              Solicita una cotización
+              {messages.hero.cta}
             </button>
           </Link>
         </motion.div>

@@ -6,36 +6,20 @@ import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
+import messages from "./messages/en.json"; // or use context for language selection
 
-const servicios = [
-  {
-    icon: <HardHat size={24} />,
-    title: "Pavimentos de Concreto",
-    image: "/servicios/pavimento.jpg",
-    description:
-      "Construcción de pavimentos resistentes y duraderos para vías, parqueaderos y zonas industriales.",
-  },
-  {
-    icon: <Wrench size={24} />,
-    title: "Andenes Urbanos",
-    image: "/servicios/andenes.jpg",
-    description:
-      "Diseño y construcción de andenes accesibles, estéticos y seguros para la ciudad.",
-  },
-  {
-    icon: <Construction size={24} />,
-    title: "Placas Huella",
-    image: "/servicios/placa-huella.jpg",
-    description:
-      "Soluciones eficientes para caminos rurales y zonas de difícil acceso.",
-  },
-  {
-    icon: <Building2 size={24} />,
-    title: "Pisos Industriales",
-    image: "/servicios/pisos.jpg",
-    description:
-      "Pisos de alta resistencia ideales para bodegas, fábricas y talleres.",
-  },
+const iconComponents = {
+  pavement: <HardHat size={24} />,
+  sidewalk: <Wrench size={24} />,
+  track: <Construction size={24} />,
+  industrial: <Building2 size={24} />
+};
+
+const serviceImages = [
+  "/servicios/pavimento.jpg",
+  "/servicios/andenes.jpg",
+  "/servicios/placa-huella.jpg",
+  "/servicios/pisos.jpg"
 ];
 
 export default function Servicios() {
@@ -43,7 +27,7 @@ export default function Servicios() {
     <section id="servicios" className="bg-gray-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
-          Nuestros Servicios
+          {messages.services.title}
         </h2>
         <div className="w-16 h-[2px] bg-yellow-500 rounded-full mb-6 mx-auto" />
         <Swiper
@@ -57,12 +41,12 @@ export default function Servicios() {
             1024: { slidesPerView: 3 },
           }}
         >
-          {servicios.map((servicio, index) => (
+          {messages.services.items.map((servicio, index) => (
             <SwiperSlide key={index}>
               <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div className="w-full h-48 relative">
                   <Image
-                    src={servicio.image}
+                    src={serviceImages[index]}
                     alt={servicio.title}
                     fill
                     className="object-cover"
@@ -70,7 +54,7 @@ export default function Servicios() {
                 </div>
                 <div className="p-5 text-gray-700">
                   <div className="flex items-center gap-2 text-yellow-600 mb-2">
-                    {servicio.icon}
+                    {Object.values(iconComponents)[index]}
                     <h3 className="text-lg font-semibold">{servicio.title}</h3>
                   </div>
                   <p className="text-sm">{servicio.description}</p>

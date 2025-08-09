@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "name": "Mario Trevizo",
+    "title": "Soluciones en Concreto de Alta Calidad",
+    "description": "Más de 20 años de experiencia en andenes, pavimentos y pisos industriales duraderos.",
+    "cta": "Solicita una cotización"
+  },
+  "navbar": {
+    "links": {
+      "home": "Inicio",
+      "about": "Sobre Nosotros",
+      "testimonials": "Testimonios",
+      "whyUs": "¿Por qué elegirnos?",
+      "contact": "¡Contáctanos!"
+    },
+    "buttons": {
+      "language": "ES / EN",
+      "contact": "Contáctanos"
+    }
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "items": [
+      {
+        "title": "Pavimentos de Concreto",
+        "description": "Construcción de pavimentos resistentes y duraderos para vías, parqueaderos y zonas industriales."
+      },
+      {
+        "title": "Andenes Urbanos",
+        "description": "Diseño y construcción de andenes accesibles, estéticos y seguros para la ciudad."
+      },
+      {
+        "title": "Placas Huella",
+        "description": "Soluciones eficientes para caminos rurales y zonas de difícil acceso."
+      },
+      {
+        "title": "Pisos Industriales",
+        "description": "Pisos de alta resistencia ideales para bodegas, fábricas y talleres."
+      }
+    ]
+  }
+}
