@@ -38,5 +38,12 @@
         "description": "High-resistance floors ideal for warehouses, factories, and workshops."
       }
     ]
+  },
+  "mobileDrawer": {
+    "menuTitle": "Menu",
+    "languageButton": "Change language: EN / ES",
+    "buttons": {
+      "contact": "Contact Us"
+    }
   }
 }

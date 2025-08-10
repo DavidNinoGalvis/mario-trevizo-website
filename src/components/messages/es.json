@@ -38,5 +38,12 @@
         "description": "Pisos de alta resistencia ideales para bodegas, fábricas y talleres."
       }
     ]
+  },
+  "mobileDrawer": {
+    "menuTitle": "Menú",
+    "languageButton": "Cambiar idioma: ES / EN",
+    "buttons": {
+      "contact": "Contáctanos"
+    }
   }
 }

@@ -5,57 +5,34 @@ import Image from "next/image";
 import { Home, Info, Star, PhoneCall, Mail, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileDrawer from "@/components/MobileDrawer";
-import messages from "./messages/en.json";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function Navbar() {
+  const { messages, toggleLanguage, language } = useLanguage();
+
   return (
     <header className="sticky top-0 z-50 bg-black border-b border-gray-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 transition-transform duration-300 ease-in-out hover:scale-105"
-        >
-          <Image
-            src="/logo-mt.png"
-            alt="mt-logo-principal"
-            width={100}
-            height={40}
-            className="object-contain"
-            priority
-          />
+        <Link href="/" className="flex items-center gap-2 transition-transform duration-300 ease-in-out hover:scale-105">
+          <Image src="/logo-mt.png" alt="mt-logo-principal" width={100} height={40} className="object-contain" priority />
         </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-white">
-          <Link
-            href="#sobre-mi"
-            className="flex items-center gap-1 hover:text-yellow-400 transition"
-          >
+          <Link href="#sobre-mi" className="flex items-center gap-1 hover:text-yellow-400 transition">
             <Home size={16} /> {messages.navbar.links.home}
           </Link>
-          <Link
-            href="#guias"
-            className="flex items-center gap-1 hover:text-yellow-400 transition"
-          >
+          <Link href="#guias" className="flex items-center gap-1 hover:text-yellow-400 transition">
             <Info size={16} /> {messages.navbar.links.about}
           </Link>
-          <Link
-            href="#testimonios"
-            className="flex items-center gap-1 hover:text-yellow-400 transition"
-          >
+          <Link href="#testimonios" className="flex items-center gap-1 hover:text-yellow-400 transition">
             <Star size={16} /> {messages.navbar.links.testimonials}
           </Link>
-          <Link
-            href="#elegirnos"
-            className="flex items-center gap-1 hover:text-yellow-400 transition"
-          >
+          <Link href="#elegirnos" className="flex items-center gap-1 hover:text-yellow-400 transition">
             <Globe size={16} /> {messages.navbar.links.whyUs}
           </Link>
-          <Link
-            href="#contacto"
-            className="flex items-center gap-1 hover:text-yellow-400 transition"
-          >
+          <Link href="#contacto" className="flex items-center gap-1 hover:text-yellow-400 transition">
             <PhoneCall size={16} /> {messages.navbar.links.contact}
           </Link>
         </nav>
@@ -68,11 +45,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="flex items-center gap-1 text-white text-xs border border-gray-600 px-3 py-1.5 rounded-full hover:bg-yellow-400 hover:text-black transition"
-            onClick={() => {
-              alert("Lógica para cambiar idioma: ES / EN");
-            }}
+            onClick={toggleLanguage}
           >
-            <Globe size={14} /> {messages.navbar.buttons.language}
+            <Globe size={14} /> {language === "es" ? "EN" : "ES"}
           </motion.button>
 
           {/* Botón contacto (desktop) */}
