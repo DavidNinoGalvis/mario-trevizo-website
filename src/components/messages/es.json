@@ -45,5 +45,12 @@
     "buttons": {
       "contact": "Contáctanos"
     }
+  },
+  "ConcreteMixerSection": {
+    "title": "¿Por qué elegirnos?",
+    "description": "",
+    "option 1": "Tiempos de entrega rapidos",
+    "option 2": "Concreto de Alta Calidad",
+    "option 3": "Servicio Personalizados cualquier sector"
   }
 }

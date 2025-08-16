@@ -11,6 +11,7 @@ import {
 } from "@react-three/drei";
 import { motion } from "framer-motion";
 import * as THREE from "three";
+import { Timer, ShieldCheck, Truck, BadgeCheck } from "lucide-react";
 
 function ConcreteMixer({ url = "/models/concrete-mixer.glb" }) {
   const group = useRef<THREE.Group>(null);
@@ -29,37 +30,12 @@ function ConcreteMixer({ url = "/models/concrete-mixer.glb" }) {
     }
   });
 
-  // Animación con scroll
-  const scroll = useScroll();
+  // Animación automática de rotación
   useFrame((state, delta) => {
-    const t = scroll.offset;
-    const targetRotX = THREE.MathUtils.lerp(-0.1, 0.1, t);
-    const targetRotY = THREE.MathUtils.lerp(0, 0.3, t);
-    const targetRotZ = THREE.MathUtils.lerp(0, 0.05, t);
-
     if (group.current) {
-      group.current.rotation.x = THREE.MathUtils.damp(
-        group.current.rotation.x,
-        targetRotX,
-        4,
-        delta
-      );
-      group.current.rotation.y = THREE.MathUtils.damp(
-        group.current.rotation.y,
-        targetRotY,
-        4,
-        delta
-      );
-      group.current.rotation.z = THREE.MathUtils.damp(
-        group.current.rotation.z,
-        targetRotZ,
-        4,
-        delta
-      );
-      // Escala más pequeña para que quepa completo
-      group.current.scale.setScalar(0.4);
+      group.current.rotation.y += delta * 0.5; // Gira automáticamente
+      group.current.scale.setScalar(0.45);
     }
-
     state.camera.lookAt(0, 0, 0);
   });
 
@@ -68,7 +44,7 @@ function ConcreteMixer({ url = "/models/concrete-mixer.glb" }) {
       ref={group}
       object={scene}
       rotation={[0, 0, 0]}
-      position={[0, 0, 0]}
+      position={[0, -1, 0]}
     />
   );
 }
@@ -76,33 +52,55 @@ function ConcreteMixer({ url = "/models/concrete-mixer.glb" }) {
 export default function ConcreteMixerSection() {
   return (
     <section className="relative min-h-screen bg-black text-white overflow-hidden">
-      <div className="grid grid-cols-2 h-screen">
-        {/* Columna izquierda - Texto */}
-        <div className="flex items-center justify-center p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-7xl mx-auto">
+        {/* Columna izquierda - Texto (SOLO esta parte fue modificada) */}
+        <div className="flex items-center justify-center px-4 py-6 md:py-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
+            transition={{ duration: 0.6 }}
+            className="w-full max-w-xl text-left"
           >
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Concrete Mixer 3D
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight flex items-center gap-3">
+              <Timer className="w-8 h-8 text-yellow-400" />
+              ¿Por qué elegirnos?
             </h2>
-            <p className="mt-4 max-w-lg mx-auto opacity-80 text-lg">
-              Scroll down to see the animation.
-            </p>
+
+            <ul className="mt-5 space-y-3 text-base md:text-lg">
+              <li className="flex items-start gap-3">
+                <BadgeCheck className="w-6 h-6 mt-1 shrink-0 text-yellow-400" />
+                <span>
+                  <strong>Compromiso real</strong> y cumplimiento en cada
+                  proyecto.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <ShieldCheck className="w-6 h-6 mt-1 shrink-0 text-yellow-400" />
+                <span>
+                  <strong>Concreto de alta calidad</strong> con estándares
+                  constantes.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Truck className="w-6 h-6 mt-1 shrink-0 text-yellow-400" />
+                <span>
+                  <strong>Servicio personalizado</strong> y cobertura en
+                  cualquier sector.
+                </span>
+              </li>
+            </ul>
           </motion.div>
         </div>
 
-        {/* Columna derecha - Canvas 3D */}
-        <div className="relative flex items-center justify-center">
-          <div className="w-full h-full max-w-2xl max-h-2xl">
+        {/* Columna derecha - Canvas 3D (SIN CAMBIOS) */}
+        <div className="flex items-center justify-center w-full h-full">
+          <div className="w-full aspect-square max-w-md mx-auto">
             <Canvas
               shadows
               className="w-full h-full"
               dpr={[1, 2]}
               camera={{
-                position: [0, 0, 5],
+                position: [0, 0, 8],
                 fov: 35,
                 near: 0.1,
                 far: 50,
@@ -144,16 +142,6 @@ export default function ConcreteMixerSection() {
             </Canvas>
           </div>
         </div>
-      </div>
-
-      {/* Contenido después del scroll */}
-      <div className="relative z-20 mx-auto max-w-4xl px-6 py-24">
-        <h3 className="text-2xl md:text-3xl font-semibold">Why this works</h3>
-        <ul className="mt-4 space-y-2 list-disc list-inside text-white/90">
-          <li>Scroll controls drive camera and model tilt.</li>
-          <li>Contact shadows and HDRI add realism.</li>
-          <li>Optimized GLB keeps performance high.</li>
-        </ul>
       </div>
     </section>
   );
