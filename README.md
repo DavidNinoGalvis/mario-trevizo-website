@@ -1,8 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mario Trevizo Website
 
-## Getting Started
+A modern and professional website for **Mario Trevizo - Concrete Specialist**, built with [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), and [TypeScript](https://www.typescriptlang.org/).  
+The site showcases expertise in concrete solutions with an elegant and responsive design, optimized for performance and user experience.
 
-First, run the development server:
+---
+
+## - Getting Started
+
+First, clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/DavidNinoGalvis/mario-trevizo-website.git
+cd mario-trevizo-website
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +27,70 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.  
+The app will automatically update as you edit the files.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## - Tech Stack
 
-## Learn More
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Maps**: [React Leaflet](https://react-leaflet.js.org/)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+├── app/                  # Next.js App Router pages
+│   └── page.tsx          # Main page
+├── components/           # Reusable UI components
+│   ├── Navbar.tsx        # Navigation bar
+│   ├── Hero.tsx          # Hero section
+│   ├── Testimonials/     # Testimonials carousel + cards
+│   ├── ServiceArea.tsx   # Interactive map with Leaflet
+│   └── Footer.tsx        # Footer with contact info
+├── public/               # Static assets (images, icons, etc.)
+├── styles/               # Global styles
+└── README.md             # Project documentation
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## - Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Responsive design** across all devices
+- **Smooth animations** using Framer Motion
+- **Interactive map** highlighting Colorado-only service area
+- **Testimonials carousel** to showcase client feedback
+- **Optimized performance** with Next.js and Vercel
+- **Modern branding** using Montserrat font for typography
+
+---
+
+## - Geographic Limitation
+
+> ⚠️ Currently, services are **limited to the state of Colorado (USA)**.  
+> The interactive map in the website highlights major cities served: Denver, Boulder, Colorado Springs, and Fort Collins.
+
+---
+
+## - Learn More
+
+If you’re new to the stack, here are some useful resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) – learn about Next.js features and API
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) – utility-first styling
+- [Framer Motion](https://www.framer.com/motion/) – animation library for React
+- [React Leaflet](https://react-leaflet.js.org/) – maps for React apps
+
+---
+
+## - Deploy on Vercel
+
+The easiest way to deploy this Next.js app is to use [Vercel](https://vercel.com).  
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
