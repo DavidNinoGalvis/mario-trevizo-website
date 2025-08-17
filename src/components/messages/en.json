@@ -45,5 +45,13 @@
     "buttons": {
       "contact": "Contact Us"
     }
+  },
+  "concreteMixer": {
+    "title": "Why Choose Us?",
+    "items": [
+      "Real commitment and compliance in every project.",
+      "High-quality concrete with consistent standards.",
+      "Personalized service and coverage in any sector."
+    ]
   }
 }

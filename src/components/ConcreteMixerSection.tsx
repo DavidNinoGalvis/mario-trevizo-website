@@ -13,12 +13,12 @@ import {
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
 import { Timer, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 function ConcreteMixer({ url = '/models/concrete-mixer.glb' }) {
   const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF(url);
 
-  // Ajustes de materiales una sola vez
   useEffect(() => {
     scene.traverse((obj: any) => {
       if (obj.isMesh) {
@@ -34,7 +34,6 @@ function ConcreteMixer({ url = '/models/concrete-mixer.glb' }) {
     });
   }, [scene]);
 
-  // Animación: giro lento, tipo “turntable”
   useFrame((_, delta) => {
     if (group.current) {
       group.current.rotation.y += delta * 0.25;
@@ -43,7 +42,6 @@ function ConcreteMixer({ url = '/models/concrete-mixer.glb' }) {
 
   return (
     <group ref={group} position={[0, -1, 0]} scale={[0.45, 0.45, 0.45]}>
-      {/* Offset para centrar el pivote */}
       <primitive object={scene} position={[-0.8, 0, 0]} />
     </group>
   );
@@ -77,6 +75,8 @@ function Loader() {
 }
 
 export default function ConcreteMixerSection() {
+  const { messages } = useLanguage();
+
   return (
     <section className="relative overflow-hidden bg-black text-white">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center md:grid-cols-2">
@@ -91,7 +91,7 @@ export default function ConcreteMixerSection() {
           >
             <h2 className="flex items-center gap-3 text-4xl font-bold tracking-tight md:text-5xl">
               <Timer className="h-8 w-8 text-yellow-400" aria-hidden="true" />
-              ¿Por qué elegirnos?
+              {messages.concreteMixer.title}
             </h2>
 
             <ul className="mt-5 space-y-3 text-base md:text-lg">
@@ -100,30 +100,21 @@ export default function ConcreteMixerSection() {
                   className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
                   aria-hidden="true"
                 />
-                <span>
-                  <strong>Compromiso real</strong> y cumplimiento en cada
-                  proyecto.
-                </span>
+                <span>{messages.concreteMixer.items[0]}</span>
               </li>
               <li className="flex items-start gap-3">
                 <ShieldCheck
                   className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
                   aria-hidden="true"
                 />
-                <span>
-                  <strong>Concreto de alta calidad</strong> con estándares
-                  constantes.
-                </span>
+                <span>{messages.concreteMixer.items[1]}</span>
               </li>
               <li className="flex items-start gap-3">
                 <Truck
                   className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
                   aria-hidden="true"
                 />
-                <span>
-                  <strong>Servicio personalizado</strong> y cobertura en
-                  cualquier sector.
-                </span>
+                <span>{messages.concreteMixer.items[2]}</span>
               </li>
             </ul>
           </motion.div>
