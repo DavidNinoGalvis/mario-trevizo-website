@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import Servicios from '@/components/Servicios';
 import dynamic from 'next/dynamic';
 import Testimonials from '@/components/Testimonials';
+import ServiceArea from '@/components/ServiceArea';
 
 const ConcreteMixerSection = dynamic(
   () => import('@/components/ConcreteMixerSection'),
@@ -17,6 +18,7 @@ export default function Home() {
       <Servicios />
       <ConcreteMixerSection />
       <Testimonials />
+      <ServiceArea />
     </main>
   );
 }

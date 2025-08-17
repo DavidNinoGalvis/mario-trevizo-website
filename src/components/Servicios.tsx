@@ -1,9 +1,10 @@
 'use client';
 
-import { Wrench, Building2, HardHat, Construction } from 'lucide-react';
+import { Wrench, Building2, HardHat, Construction, Cog } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useLanguage } from '@/app/context/LanguageContext';
@@ -28,11 +29,21 @@ export default function Servicios() {
   return (
     <section id="servicios" className="bg-gray-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+        {/* Título con ícono */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl font-bold text-center mb-6 text-gray-800 flex justify-center items-center gap-2"
+        >
+          <Cog className="text-yellow-600" size={28} />
           {messages.services.title}
-        </h2>
-        <div className="w-16 h-[2px] bg-yellow-500 rounded-full mb-6 mx-auto" />
+        </motion.h2>
 
+        <div className="w-16 h-[2px] bg-yellow-500 rounded-full mb-10 mx-auto" />
+
+        {/* Carrusel */}
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={24}
@@ -46,7 +57,13 @@ export default function Servicios() {
         >
           {messages.services.items.map((servicio: any, index: number) => (
             <SwiperSlide key={index}>
-              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+              >
                 <div className="w-full h-48 relative">
                   <Image
                     src={serviceImages[index]}
@@ -62,7 +79,7 @@ export default function Servicios() {
                   </div>
                   <p className="text-sm">{servicio.description}</p>
                 </div>
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

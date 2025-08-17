@@ -1,85 +1,89 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { HardHat, Building2, Briefcase, Factory } from 'lucide-react';
-import { TestimonialCard } from './TestimonialCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { User, Building2, HardHat, Factory } from 'lucide-react';
+import { TestimonialCard } from './TestimonialCard';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const testimonials = [
   {
-    name: 'John Peterson',
-    profession: 'Civil Engineer, Denver',
-    icon: HardHat,
     message:
-      'We hired Mario Trevizo LLA for the paving of an industrial access road and were impressed by the speed and quality. They delivered on time and the finish was flawless.',
+      'Excellent work on our industrial pavement. Mario and his team are top-class professionals.',
+    name: 'James Carter',
+    profession: 'Operations Manager, Denver',
+    Icon: Building2,
   },
   {
-    name: 'Emily Rodriguez',
-    profession: 'Restaurant Owner, Colorado Springs',
-    icon: Building2,
     message:
-      'The renovation of our parking lot with stamped concrete completely changed our customers’ experience. Clean work, attention to detail, and very professional service.',
+      'The sidewalks turned out perfect. They met all quality standards and finished right on time.',
+    name: 'Laura Mitchell',
+    profession: 'Infrastructure Director, Colorado Springs',
+    Icon: HardHat,
   },
   {
-    name: 'Michael Thompson',
-    profession: 'Independent Contractor, Boulder',
-    icon: Briefcase,
     message:
-      'Their team is reliable and professional. On rural asphalt projects they showed true commitment, adapting to difficult conditions without sacrificing quality.',
+      'Very satisfied with the concrete work. I highly recommend their services for any construction project.',
+    name: 'David Miller',
+    profession: 'Property Owner, Boulder',
+    Icon: User,
   },
   {
-    name: 'Sarah Martinez',
-    profession: 'Condominium Manager, Fort Collins',
-    icon: Factory,
     message:
-      'The industrial floors they installed in our warehouses exceeded expectations. The durability and finish are top-notch.',
+      'The industrial floors in our warehouse exceeded expectations. Durable and flawless finish.',
+    name: 'Sarah Johnson',
+    profession: 'Warehouse Manager, Fort Collins',
+    Icon: Factory,
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="bg-gray-50 py-16 px-4">
-      <div className="mx-auto max-w-7xl">
-        <motion.h2
+    <section id="testimonials" className="bg-white py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Título con ícono grande y redondo */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-8 text-center text-3xl font-bold text-gray-800"
+          className="text-center mb-12"
         >
-          What our clients say
-        </motion.h2>
-        <div className="mx-auto mb-10 h-[2px] w-16 rounded-full bg-yellow-500" />
+          <div className="flex justify-center mb-4">
+            <div className="bg-yellow-500 p-4 rounded-full shadow-md">
+              <HardHat size={36} className="text-white" />
+            </div>
+          </div>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            What our clients say
+          </h2>
+          <div className="w-16 h-[2px] bg-yellow-500 rounded-full mx-auto" />
+        </motion.div>
 
         {/* Carrusel */}
         <Swiper
-          modules={[Pagination, Autoplay]}
+          modules={[Autoplay, Pagination]}
           spaceBetween={24}
+          slidesPerView={1}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          autoplay={{ delay: 5000 }}
           breakpoints={{
-            640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
         >
-          {testimonials.map((t, i) => (
-            <SwiperSlide key={i}>
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <TestimonialCard
-                  message={t.message}
-                  name={t.name}
-                  profession={t.profession}
-                  Icon={t.icon}
-                />
+                <TestimonialCard {...testimonial} />
               </motion.div>
             </SwiperSlide>
           ))}
