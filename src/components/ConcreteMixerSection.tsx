@@ -1,88 +1,125 @@
-"use client";
+'use client';
 
-import { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import {
   Environment,
-  ScrollControls,
   useGLTF,
-  useScroll,
   ContactShadows,
-} from "@react-three/drei";
-import { motion } from "framer-motion";
-import * as THREE from "three";
-import { Timer, ShieldCheck, Truck, BadgeCheck } from "lucide-react";
+  Html,
+  Preload,
+  AdaptiveDpr,
+} from '@react-three/drei';
+import { motion } from 'framer-motion';
+import * as THREE from 'three';
+import { Timer, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
 
-function ConcreteMixer({ url = "/models/concrete-mixer.glb" }) {
+function ConcreteMixer({ url = '/models/concrete-mixer.glb' }) {
   const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF(url);
 
-  // Ajustes de materiales y sombras
-  scene.traverse((obj: any) => {
-    if (obj.isMesh) {
-      obj.castShadow = false;
-      obj.receiveShadow = true;
-      if (obj.material) {
-        obj.material.envMapIntensity = 0.4;
-        obj.material.roughness = Math.min(0.95, obj.material.roughness ?? 0.8);
-        obj.material.metalness = Math.max(0.0, obj.material.metalness ?? 0.0);
+  // Ajustes de materiales una sola vez
+  useEffect(() => {
+    scene.traverse((obj: any) => {
+      if (obj.isMesh) {
+        obj.castShadow = false;
+        obj.receiveShadow = true;
+        const mat = obj.material as THREE.MeshStandardMaterial | undefined;
+        if (mat) {
+          mat.envMapIntensity = 0.5;
+          mat.roughness = Math.min(0.9, mat.roughness ?? 0.8);
+          mat.metalness = Math.max(0.0, mat.metalness ?? 0.0);
+        }
       }
-    }
-  });
+    });
+  }, [scene]);
 
-  // Animación automática de rotación
-  useFrame((state, delta) => {
+  // Animación: giro lento, tipo “turntable”
+  useFrame((_, delta) => {
     if (group.current) {
-      group.current.rotation.y += delta * 0.5; // Gira automáticamente
-      group.current.scale.setScalar(0.45);
+      group.current.rotation.y += delta * 0.25;
     }
-    state.camera.lookAt(0, 0, 0);
   });
 
   return (
-    <primitive
-      ref={group}
-      object={scene}
-      rotation={[0, 0, 0]}
-      position={[0, -1, 0]}
-    />
+    <group ref={group} position={[0, -1, 0]} scale={[0.45, 0.45, 0.45]}>
+      {/* Offset para centrar el pivote */}
+      <primitive object={scene} position={[-0.8, 0, 0]} />
+    </group>
+  );
+}
+
+function Loader() {
+  return (
+    <Html center>
+      <div className="flex items-center gap-3 rounded-xl bg-white/90 px-4 py-2 text-gray-800 shadow">
+        <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+            fill="none"
+            opacity=".25"
+          />
+          <path
+            d="M22 12a10 10 0 0 0-10-10"
+            stroke="currentColor"
+            strokeWidth="4"
+            opacity=".9"
+          />
+        </svg>
+        <span>Cargando modelo…</span>
+      </div>
+    </Html>
   );
 }
 
 export default function ConcreteMixerSection() {
   return (
-    <section className="relative min-h-screen bg-black text-white overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-7xl mx-auto">
-        {/* Columna izquierda - Texto (SOLO esta parte fue modificada) */}
-        <div className="flex items-center justify-center px-4 py-6 md:py-6">
+    <section className="relative overflow-hidden bg-black text-white">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center md:grid-cols-2">
+        {/* Columna izquierda */}
+        <div className="flex items-center justify-center px-4 py-8 md:py-12">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
             className="w-full max-w-xl text-left"
           >
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight flex items-center gap-3">
-              <Timer className="w-8 h-8 text-yellow-400" />
+            <h2 className="flex items-center gap-3 text-4xl font-bold tracking-tight md:text-5xl">
+              <Timer className="h-8 w-8 text-yellow-400" aria-hidden="true" />
               ¿Por qué elegirnos?
             </h2>
 
             <ul className="mt-5 space-y-3 text-base md:text-lg">
               <li className="flex items-start gap-3">
-                <BadgeCheck className="w-6 h-6 mt-1 shrink-0 text-yellow-400" />
+                <BadgeCheck
+                  className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
+                  aria-hidden="true"
+                />
                 <span>
                   <strong>Compromiso real</strong> y cumplimiento en cada
                   proyecto.
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <ShieldCheck className="w-6 h-6 mt-1 shrink-0 text-yellow-400" />
+                <ShieldCheck
+                  className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
+                  aria-hidden="true"
+                />
                 <span>
                   <strong>Concreto de alta calidad</strong> con estándares
                   constantes.
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <Truck className="w-6 h-6 mt-1 shrink-0 text-yellow-400" />
+                <Truck
+                  className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
+                  aria-hidden="true"
+                />
                 <span>
                   <strong>Servicio personalizado</strong> y cobertura en
                   cualquier sector.
@@ -92,52 +129,43 @@ export default function ConcreteMixerSection() {
           </motion.div>
         </div>
 
-        {/* Columna derecha - Canvas 3D (SIN CAMBIOS) */}
-        <div className="flex items-center justify-center w-full h-full">
-          <div className="w-full aspect-square max-w-md mx-auto">
+        {/* Columna derecha */}
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="mx-auto aspect-square w-full max-w-md">
             <Canvas
               shadows
-              className="w-full h-full"
-              dpr={[1, 2]}
-              camera={{
-                position: [0, 0, 8],
-                fov: 35,
-                near: 0.1,
-                far: 50,
-              }}
-              gl={{
-                antialias: true,
-                powerPreference: "high-performance",
-              }}
+              className="h-full w-full"
+              dpr={[1, 1.25]}
+              camera={{ position: [0, 0, 8], fov: 35, near: 0.1, far: 50 }}
+              gl={{ antialias: false, powerPreference: 'high-performance' }}
             >
-              <color attach="background" args={[0x000000]} />
+              <color attach="background" args={['#000000']} />
 
-              <Suspense fallback={null}>
-                <ScrollControls pages={2} damping={0.2}>
-                  <group>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight
-                      intensity={1.8}
-                      position={[3, 4, 3]}
-                      castShadow
-                      shadow-mapSize-width={1024}
-                      shadow-mapSize-height={1024}
-                    />
-                    <directionalLight intensity={0.6} position={[-2, 2, -2]} />
-                  </group>
+              <Suspense fallback={<Loader />}>
+                <ambientLight intensity={0.5} />
+                <directionalLight
+                  intensity={1.4}
+                  position={[3, 4, 3]}
+                  castShadow
+                  shadow-mapSize-width={512}
+                  shadow-mapSize-height={512}
+                />
+                <directionalLight intensity={0.5} position={[-2, 2, -2]} />
 
-                  <ConcreteMixer url="/models/concrete-mixer.glb" />
+                <ConcreteMixer url="/models/concrete-mixer.glb" />
 
-                  <ContactShadows
-                    position={[0, -1, 0]}
-                    opacity={0.4}
-                    blur={1}
-                    far={4}
-                    resolution={512}
-                  />
+                <ContactShadows
+                  position={[0, -1, 0]}
+                  opacity={0.35}
+                  blur={1.2}
+                  far={4}
+                  resolution={256}
+                  frames={1}
+                />
 
-                  <Environment preset="warehouse" />
-                </ScrollControls>
+                <Environment preset="warehouse" />
+                <AdaptiveDpr pixelated />
+                <Preload all />
               </Suspense>
             </Canvas>
           </div>
@@ -147,4 +175,4 @@ export default function ConcreteMixerSection() {
   );
 }
 
-useGLTF.preload("/models/concrete-mixer.glb");
+useGLTF.preload('/models/concrete-mixer.glb');
