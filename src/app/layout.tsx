@@ -1,16 +1,12 @@
-import type { ReactNode } from "react";
-import Navbar from "@/components/Navbar";
-import { LanguageProvider } from "./context/LanguageContext";
-import "@/app/globals.css";
+import type { ReactNode } from 'react';
+import '@/app/globals.css';
+import { Providers } from './Providers';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es">
-      <body>
-        <LanguageProvider>
-          <Navbar />
-          {children}
-        </LanguageProvider>
+    <html lang="es" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

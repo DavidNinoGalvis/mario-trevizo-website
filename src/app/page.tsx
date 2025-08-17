@@ -1,12 +1,13 @@
-"use client";
-import Image from "next/image";
-import Hero from "@/components/Hero";
-import Servicios from "@/components/Servicios";
-import dynamic from "next/dynamic";
+'use client';
+import Image from 'next/image';
+import Hero from '@/components/Hero';
+import Servicios from '@/components/Servicios';
+import dynamic from 'next/dynamic';
+import Testimonials from '@/components/Testimonials';
 
 const ConcreteMixerSection = dynamic(
-  () => import("@/components/ConcreteMixerSection"),
-  { ssr: false }
+  () => import('@/components/ConcreteMixerSection'),
+  { ssr: false },
 );
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <Servicios />
       <ConcreteMixerSection />
+      <Testimonials />
     </main>
   );
 }
