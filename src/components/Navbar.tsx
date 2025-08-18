@@ -106,7 +106,7 @@ export default function Navbar() {
           <motion.div
             whileHover={{
               scale: 1.08,
-              rotate: [0, -2, 2, 0],
+              rotate: [0, 2],
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
