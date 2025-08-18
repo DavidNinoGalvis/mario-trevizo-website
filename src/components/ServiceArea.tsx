@@ -3,46 +3,53 @@
 import { motion } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import React from 'react';
+import { useState, useEffect } from 'react';
 
-// Fix para los íconos de Leaflet en Next.js
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
+// Componente del mapa que solo se renderiza en el cliente
+const MapComponent = dynamic(
+  () => {
+    return import('leaflet').then((L) => {
+      // Fix para los íconos de Leaflet en Next.js
+      delete (L.Icon.Default.prototype as Record<string, unknown>)._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+        iconUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+        shadowUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      });
 
-// Carga dinámica del mapa (solo en el cliente)
-const Map = dynamic(
-  () =>
-    import('react-leaflet').then(
-      ({ MapContainer, TileLayer, Marker, Popup }) =>
-        function MapComponent() {
-          return (
-            <MapContainer
-              center={[39.5501, -105.7821]} // Centro de Colorado
-              zoom={7}
-              scrollWheelZoom={false}
-              style={{ height: '100%', width: '100%' }}
-            >
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              <Marker position={[39.7392, -104.9903]}>
-                <Popup>We operate in Colorado only</Popup>
-              </Marker>
-            </MapContainer>
-          );
-        },
-    ),
+      return import('react-leaflet').then(
+        ({ MapContainer, TileLayer, Marker, Popup }) =>
+          function MapComponentInner() {
+            return (
+              <MapContainer
+                center={[39.5501, -105.7821]} // Centro de Colorado
+                zoom={7}
+                scrollWheelZoom={false}
+                style={{ height: '100%', width: '100%' }}
+              >
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <Marker position={[39.7392, -104.9903]}>
+                  <Popup>We operate in Colorado only</Popup>
+                </Marker>
+              </MapContainer>
+            );
+          },
+      );
+    });
+  },
   { ssr: false },
 );
 
 export default function ServiceArea() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <section className="bg-white py-16 px-6">
       <div className="max-w-4xl mx-auto text-center mb-12">
@@ -98,7 +105,16 @@ export default function ServiceArea() {
           transition={{ duration: 0.8 }}
           className="h-[400px] w-full rounded-lg overflow-hidden shadow-lg"
         >
-          <Map />
+          {isClient ? (
+            <MapComponent />
+          ) : (
+            <div className="h-full w-full bg-gray-100 flex items-center justify-center">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
+                <p className="text-gray-600">Cargando mapa...</p>
+              </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

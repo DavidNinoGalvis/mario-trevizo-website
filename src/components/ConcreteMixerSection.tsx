@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import {
   Environment,
@@ -20,8 +20,8 @@ function ConcreteMixer({ url = '/models/concrete-mixer.glb' }) {
   const { scene } = useGLTF(url);
 
   useEffect(() => {
-    scene.traverse((obj: any) => {
-      if (obj.isMesh) {
+    scene.traverse((obj: THREE.Object3D) => {
+      if (obj instanceof THREE.Mesh) {
         obj.castShadow = false;
         obj.receiveShadow = true;
         const mat = obj.material as THREE.MeshStandardMaterial | undefined;
@@ -76,6 +76,60 @@ function Loader() {
 
 export default function ConcreteMixerSection() {
   const { messages } = useLanguage();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Solo renderizar en el cliente para evitar problemas de SSR con Three.js
+  if (!isClient) {
+    return (
+      <section className="relative overflow-hidden bg-black text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center md:grid-cols-2">
+          <div className="flex items-center justify-center px-4 py-8 md:py-12">
+            <div className="w-full max-w-xl text-left">
+              <h2 className="flex items-center gap-3 text-4xl font-bold tracking-tight md:text-5xl">
+                <Timer className="h-8 w-8 text-yellow-400" aria-hidden="true" />
+                {messages.concreteMixer.title}
+              </h2>
+              <ul className="mt-5 space-y-3 text-base md:text-lg">
+                <li className="flex items-start gap-3">
+                  <BadgeCheck
+                    className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
+                    aria-hidden="true"
+                  />
+                  <span>{messages.concreteMixer.items[0]}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck
+                    className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
+                    aria-hidden="true"
+                  />
+                  <span>{messages.concreteMixer.items[1]}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Truck
+                    className="mt-1 h-6 w-6 shrink-0 text-yellow-400"
+                    aria-hidden="true"
+                  />
+                  <span>{messages.concreteMixer.items[2]}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="flex h-full w-full items-center justify-center">
+            <div className="mx-auto aspect-square w-full max-w-md flex items-center justify-center">
+              <div className="text-white text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+                <p>Cargando modelo 3D...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative overflow-hidden bg-black text-white">

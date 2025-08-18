@@ -1,15 +1,10 @@
 'use client';
-import Image from 'next/image';
 import Hero from '@/components/Hero';
 import Servicios from '@/components/Servicios';
-import dynamic from 'next/dynamic';
+import ConcreteMixerSection from '@/components/ConcreteMixerSection';
 import Testimonials from '@/components/Testimonials';
 import ServiceArea from '@/components/ServiceArea';
-
-const ConcreteMixerSection = dynamic(
-  () => import('@/components/ConcreteMixerSection'),
-  { ssr: false },
-);
+import Contact from '@/components/Contact';
 
 export default function Home() {
   return (
@@ -19,6 +14,7 @@ export default function Home() {
       <ConcreteMixerSection />
       <Testimonials />
       <ServiceArea />
+      <Contact />
     </main>
   );
 }

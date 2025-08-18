@@ -29,7 +29,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         const nav = navigator?.language ?? "es";
         setLanguageState(nav.startsWith("en") ? "en" : "es");
       }
-    } catch (e) {
+    } catch {
       // en entornos server-safe no hacemos nada
     }
   }, []);
@@ -38,7 +38,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       localStorage.setItem("mt_lang", language);
-    } catch (e) {}
+    } catch {
+      // Ignorar errores de localStorage
+    }
   }, [language]);
 
   const setLanguage = (l: Lang) => setLanguageState(l);

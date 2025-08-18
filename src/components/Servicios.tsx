@@ -55,7 +55,7 @@ export default function Servicios() {
             1024: { slidesPerView: 3 },
           }}
         >
-          {messages.services.items.map((servicio: any, index: number) => (
+          {messages.services.items.map((servicio: { title: string; description: string }, index: number) => (
             <SwiperSlide key={index}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
