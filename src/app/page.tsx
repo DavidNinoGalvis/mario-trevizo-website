@@ -5,6 +5,7 @@ import ConcreteMixerSection from '@/components/ConcreteMixerSection';
 import Testimonials from '@/components/Testimonials';
 import ServiceArea from '@/components/ServiceArea';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Testimonials />
       <ServiceArea />
       <Contact />
+      <Footer />
     </main>
   );
 }
