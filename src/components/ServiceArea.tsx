@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 // Componente del mapa que solo se renderiza en el cliente
 const MapComponent = dynamic(
@@ -43,13 +44,16 @@ const MapComponent = dynamic(
   { ssr: false },
 );
 
+
+
+
 export default function ServiceArea() {
+  const { messages } = useLanguage();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
   return (
     <section className="bg-white py-16 px-6">
       <div className="max-w-4xl mx-auto text-center mb-12">
@@ -74,7 +78,7 @@ export default function ServiceArea() {
           transition={{ duration: 0.6 }}
           className="text-3xl font-bold text-gray-800 mb-4"
         >
-          Our Service Area
+           {messages.serviceArea.title}
         </motion.h2>
 
         {/* Línea decorativa */}
@@ -88,11 +92,7 @@ export default function ServiceArea() {
           transition={{ duration: 0.7 }}
           className="text-lg text-gray-600 max-w-2xl mx-auto"
         >
-          Currently, we proudly serve{' '}
-          <span className="font-semibold text-gray-800">Colorado</span> only.
-          Our projects are located in Denver, Boulder, Colorado Springs, Fort
-          Collins, and nearby areas. For clients outside the state, please note
-          that we are not offering services beyond Colorado at this time.
+          {messages.serviceArea.description}
         </motion.p>
       </div>
 

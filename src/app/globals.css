@@ -3,3 +3,67 @@
 body {
   font-family: var(--font-montserrat), sans-serif;
 }
+
+/* globals.css */
+.link-underline {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  left: 0;
+  bottom: -4px;
+  background: linear-gradient(90deg, #facc15, #f59e0b); /* amarillo degradado */
+  transition: width 0.3s ease-in-out;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+.italic-title {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.mt-highlight {
+  font-size: 6rem; /* letras bien grandes */
+  font-family: 'Orbitron', sans-serif; /* alternativa estilo RADON */
+  font-weight: 600;
+  color: #ffcc00; /* amarillo construcción */
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  /*animation: neonGlow 1.5s ease-in-out infinite alternate;*/
+}
+.mtsub-highlight {
+  font-size:2rem; /* letras bien grandes */
+  font-family: 'Orbitron', sans-serif; /* alternativa estilo RADON */
+  font-weight: 600;
+  color: #ffcc00; /* amarillo construcción */
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  /*animation: neonGlow 1.5s ease-in-out infinite alternate;*/
+}
+
+@keyframes neonGlow {
+  from {
+    text-shadow: 0 0 8px #ffcc00, 0 0 16px #ff9900, 0 0 24px rgba(0, 0, 0, 0.5);
+  }
+  to {
+    text-shadow: 0 0 16px #ffaa00, 0 0 32px #ff6600, 0 0 48px rgba(0, 0, 0, 0.8);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+

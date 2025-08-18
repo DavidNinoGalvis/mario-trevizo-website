@@ -43,14 +43,9 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-4 text-white">
-        <motion.div
-          className="mb-6 px-6 py-2 bg-white text-black text-lg font-semibold rounded-lg shadow-lg inline-flex items-center"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {messages.hero.name}
-        </motion.div>
+        
+        <span className="mt-highlight">{messages.hero.name}</span>
+        <span className="mtsub-highlight">{messages.hero.subtitle}</span>
 
         <div className="w-24 h-[2px] bg-yellow-500 rounded-full mb-6" />
 
@@ -66,7 +61,9 @@ export default function Hero() {
           {...fadeInUp}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+        <a href="#contacto" className="link-underline">
           {messages.hero.description}
+        </a>
         </motion.p>
 
         <motion.div

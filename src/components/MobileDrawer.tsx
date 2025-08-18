@@ -45,7 +45,7 @@ export default function MobileDrawer() {
                     <Link href="#testimonios" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-yellow-400 transition">
                       <Star size={16} /> {messages.navbar.links.testimonials}
                     </Link>
-                    <Link href="#elegirnos" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-yellow-400 transition">
+                    <Link href="#servicios" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-yellow-400 transition">
                       <Globe size={16} /> {messages.navbar.links.whyUs}
                     </Link>
                     <Link href="#contacto" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-yellow-400 transition">
