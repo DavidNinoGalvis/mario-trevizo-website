@@ -1,8 +1,9 @@
 {
   "hero": {
-    "name": "Mario Trevizo",
-    "title": "High-Quality Concrete Solutions",
-    "description": "Over 20 years of experience in durable platforms, pavements, and industrial flooring.",
+    "name": "MT",
+    "title": "Building strong foundations for stronger futures",
+    "subtitle": "CONSTRUCTION LLC",
+    "description": "Quality assurance in every project",
     "cta": "Request a quote"
   },
   "navbar": {
@@ -53,5 +54,30 @@
       "High-quality concrete with consistent standards.",
       "Personalized service and coverage in any sector."
     ]
+  },
+  "testimonials": {
+  "title": "What our clients say",
+  "items": [
+    {
+      "message": "Excellent work on our industrial pavement. Mario and his team are top-class professionals.",
+      "name": "James Carter",
+      "profession": "Operations Manager, Denver"
+    },
+    {
+      "message": "The sidewalks turned out perfect. They met all quality standards and finished right on time.",
+      "name": "Laura Mitchell",
+      "profession": "Infrastructure Director, Colorado Springs"
+    },
+    {
+      "message": "Very satisfied with the concrete work. I highly recommend their services for any construction project.",
+      "name": "David Miller",
+      "profession": "Property Owner, Boulder"
+    }
+  ]
+},
+  "serviceArea": {
+    "title": "Our Service Area",
+    "description": "Currently, we proudly serve only in Colorado. Our projects are located in Denver, Boulder, Colorado Springs, Fort Collins, and nearby areas. For clients outside the state, please note that we are not offering services beyond Colorado at this time.",
+    "mapPopup": "We operate in Colorado only"
   }
 }

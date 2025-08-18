@@ -1,8 +1,9 @@
 {
   "hero": {
-    "name": "Mario Trevizo",
-    "title": "Soluciones en Concreto de Alta Calidad",
-    "description": "Más de 20 años de experiencia en andenes, pavimentos y pisos industriales duraderos.",
+    "name": "MT",
+    "title": "Cimientos fuertes para futuros firmes",
+    "subtitle": "CONSTRUCTION LLC",
+    "description": "Garantía de calidad en cada proyecto",
     "cta": "Solicita una cotización"
   },
   "navbar": {
@@ -53,5 +54,31 @@
       "Concreto de alta calidad con estándares constantes.",
       "Servicio personalizado y cobertura en cualquier sector."
     ]
+  },
+  "testimonials": {
+  "title": "Lo que dicen nuestros clientes",
+  "items": [
+    {
+      "message": "Excelente trabajo en nuestro pavimento industrial. Mario y su equipo son profesionales de primera.",
+      "name": "James Carter",
+      "profession": "Operations Manager, Denver"
+    },
+    {
+      "message": "Los andenes quedaron perfectos. Cumplieron con todos los estándares de calidad y a tiempo.",
+      "name": "Laura Mitchell",
+      "profession": "Infrastructure Director, Colorado Springs"
+    },
+    {
+      "message": "Muy satisfecho con el trabajo en concreto. Recomiendo totalmente sus servicios.",
+      "name": "David Miller",
+      "profession": "Property Owner, Boulder"
+    }
+  ]
+},
+  "serviceArea": {
+    "title": "Nuestra área de servicio",
+    "description": "Actualmente, servimos con orgullo únicamente en Colorado. Nuestros proyectos están ubicados en Denver, Boulder, Colorado Springs, Fort Collins y áreas cercanas. Para clientes fuera del estado, no ofrecemos servicios en este momento.",
+    "mapPopup": "Operamos solo en Colorado"
   }
+
 }

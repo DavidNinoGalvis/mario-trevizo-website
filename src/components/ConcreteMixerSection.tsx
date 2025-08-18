@@ -78,7 +78,7 @@ export default function ConcreteMixerSection() {
   const { messages } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden bg-black text-white">
+    <section id="elegirnos" className="relative overflow-hidden bg-black text-white">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center md:grid-cols-2">
         {/* Columna izquierda */}
         <div className="flex items-center justify-center px-4 py-8 md:py-12">

@@ -3,46 +3,18 @@
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-import { User, Building2, HardHat, Factory } from 'lucide-react';
+import { HardHat } from 'lucide-react';
 import { TestimonialCard } from './TestimonialCard';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const testimonials = [
-  {
-    message:
-      'Excellent work on our industrial pavement. Mario and his team are top-class professionals.',
-    name: 'James Carter',
-    profession: 'Operations Manager, Denver',
-    Icon: Building2,
-  },
-  {
-    message:
-      'The sidewalks turned out perfect. They met all quality standards and finished right on time.',
-    name: 'Laura Mitchell',
-    profession: 'Infrastructure Director, Colorado Springs',
-    Icon: HardHat,
-  },
-  {
-    message:
-      'Very satisfied with the concrete work. I highly recommend their services for any construction project.',
-    name: 'David Miller',
-    profession: 'Property Owner, Boulder',
-    Icon: User,
-  },
-  {
-    message:
-      'The industrial floors in our warehouse exceeded expectations. Durable and flawless finish.',
-    name: 'Sarah Johnson',
-    profession: 'Warehouse Manager, Fort Collins',
-    Icon: Factory,
-  },
-];
-
 export default function Testimonials() {
+  const { messages } = useLanguage();
+
   return (
-    <section id="testimonials" className="bg-white py-16 px-4">
+    <section id="testimonios" className="bg-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Título con ícono grande y redondo */}
         <motion.div
@@ -58,7 +30,7 @@ export default function Testimonials() {
             </div>
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            What our clients say
+            {messages.testimonials.title}
           </h2>
           <div className="w-16 h-[2px] bg-yellow-500 rounded-full mx-auto" />
         </motion.div>
@@ -75,18 +47,40 @@ export default function Testimonials() {
             1024: { slidesPerView: 3 },
           }}
         >
-          {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <TestimonialCard {...testimonial} />
-              </motion.div>
-            </SwiperSlide>
-          ))}
+          {messages.testimonials.items.map(
+            (
+              t: { message: string; name: string; role: string; icon: string },
+              index: number
+            ) => {
+              // mapeo de iconos segun clave en JSON
+              const iconMap: Record<string, React.ElementType> = {
+                user: require('lucide-react').User,
+                building: require('lucide-react').Building2,
+                hardhat: require('lucide-react').HardHat,
+                factory: require('lucide-react').Factory,
+              };
+
+              const Icon = iconMap[t.icon] || require('lucide-react').User;
+
+              return (
+                <SwiperSlide key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <TestimonialCard
+                      message={t.message}
+                      name={t.name}
+                      profession={t.role}
+                      Icon={Icon}
+                    />
+                  </motion.div>
+                </SwiperSlide>
+              );
+            }
+          )}
         </Swiper>
       </div>
     </section>
