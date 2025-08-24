@@ -10,8 +10,12 @@ import {
   CheckCircle,
   AlertCircle,
 } from 'lucide-react';
+import { useLanguage } from '@/app/context/LanguageContext';
+
+    
 
 export default function Contact() {
+  const{ messages } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -120,12 +124,11 @@ export default function Contact() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#0D0D0D] via-gray-800 to-[#D6A52F] bg-clip-text text-transparent mb-6">
-            Get in Touch
+            {messages.contact.title}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#D6A52F] to-[#0D0D0D] mx-auto mb-8 rounded-full"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Ready to start your concrete project? Choose your preferred way to
-            connect with our expert team.
+            {messages.contact.subtitle}
           </p>
         </div>
 
@@ -140,7 +143,7 @@ export default function Contact() {
                   : 'text-gray-700 hover:text-[#D6A52F]'
               }`}
             >
-              Contact Form
+              {messages.contact.contactForm}
             </button>
             <button
               onClick={() => setActiveMethod('direct')}
@@ -150,7 +153,7 @@ export default function Contact() {
                   : 'text-gray-700 hover:text-[#D6A52F]'
               }`}
             >
-              Direct Contact
+              {messages.contact.direct}
             </button>
           </div>
         </div>
@@ -396,28 +399,28 @@ export default function Contact() {
             {/* Quick Info */}
             <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-200">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Quick Info
+                {messages.contact.quickinfo.title}
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <Clock className="h-5 w-5 text-[#D6A52F] mt-1" />
                   <div>
-                    <p className="font-semibold">Response Time</p>
-                    <p className="text-gray-600 text-sm">Within 2-4 hours</p>
+                    <p className="font-semibold">{messages.contact.quickinfo.responseTime}</p>
+                    <p className="text-gray-600 text-sm">{messages.contact.quickinfo.within}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 text-[#D6A52F] mt-1" />
                   <div>
-                    <p className="font-semibold">Service Area</p>
-                    <p className="text-gray-600 text-sm">All of Colorado</p>
+                    <p className="font-semibold">{messages.contact.quickinfo.serviceArea}</p>
+                    <p className="text-gray-600 text-sm">{messages.contact.quickinfo.colorado}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
                   <div>
-                    <p className="font-semibold">Free Estimates</p>
-                    <p className="text-gray-600 text-sm">Always included</p>
+                    <p className="font-semibold">{messages.contact.quickinfo.freeEstimate}</p>
+                    <p className="text-gray-600 text-sm">{messages.contact.quickinfo.always}</p>
                   </div>
                 </div>
               </div>
@@ -443,13 +446,12 @@ export default function Contact() {
 
             {/* Social Proof */}
             <div className="bg-gradient-to-br from-[#D6A52F] to-[#f0c95c] rounded-3xl shadow-2xl p-8 text-[#0D0D0D]">
-              <h3 className="text-xl font-bold mb-4">Why Choose Us?</h3>
+              <h3 className="text-xl font-bold mb-4">{messages.contact.whychooseus.title}</h3>
               <ul className="space-y-2 text-sm">
-                <li>✓ 15+ years experience</li>
-                <li>✓ Licensed & insured</li>
-                <li>✓ 500+ satisfied customers</li>
-                <li>✓ 5-star Google rating</li>
-                <li>✓ Lifetime warranty</li>
+                <li>✓ {messages.contact.whychooseus.items.fir}</li>
+                <li>✓ {messages.contact.whychooseus.items.sec}</li>
+                <li>✓ {messages.contact.whychooseus.items.thir}</li>
+                <li>✓ {messages.contact.whychooseus.items.four}</li>
               </ul>
             </div>
           </div>

@@ -2,46 +2,47 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Wrench, Building2, HardHat, Construction, Cog } from 'lucide-react';
+import { Wrench, Building2, HardHat, Construction, Cog, Hammer } from 'lucide-react';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 export default function Services() {
+  const { messages } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slidesToShow, setSlidesToShow] = useState(1); // SSR-safe default
+  const [slidesToShow, setSlidesToShow] = useState(1);
 
-  // Servicios (orden debe coincidir con las imágenes)
+  // Lista de servicios (ya no necesitas servicesDesc, solo services.<key>)
   const services = [
-    {
-      title: 'Concrete Driveways',
-      description:
-        'Durable and attractive driveways designed to enhance your property value and withstand Colorado weather conditions.',
-      icon: HardHat,
-    },
-    {
-      title: 'Sidewalks & Walkways',
-      description:
-        'Safe and code-compliant sidewalks and walkways that connect your spaces beautifully and functionally.',
-      icon: Wrench,
-    },
-    {
-      title: 'Patios & Slabs',
-      description:
-        'Transform your outdoor space with custom concrete patios and slabs perfect for entertainment and relaxation.',
-      icon: Construction,
-    },
-    {
-      title: 'Commercial Concrete',
-      description:
-        'Heavy-duty commercial concrete solutions for businesses, warehouses, and industrial applications.',
-      icon: Building2,
-    },
+    { key: 'concrete', ...messages.services.concrete, icon: HardHat },
+    { key: 'driveways', ...messages.services.driveways, icon: Wrench },
+    { key: 'sidewalks', ...messages.services.sidewalks, icon: Construction },
+    { key: 'patios', ...messages.services.patios, icon: Building2 },
+    { key: 'curves', ...messages.services.curves, icon: Hammer },
+    { key: 'stampedConcrete', ...messages.services.stampedConcrete, icon: Cog },
+    { key: 'crackFilling', ...messages.services.crackFilling, icon: Hammer },
+    { key: 'sealCoating', ...messages.services.sealCoating, icon: Construction },
+    { key: 'potholeRepair', ...messages.services.potholeRepair, icon: Wrench },
+    { key: 'asphaltPaving', ...messages.services.asphaltPaving, icon: HardHat },
+    { key: 'flatWork', ...messages.services.flatWork, icon: Cog },
+    { key: 'parkingLot', ...messages.services.parkingLot, icon: Building2 },
+    { key: 'steeping', ...messages.services.steeping, icon: Hammer },
   ];
 
-  // Imágenes del componente viejo (mismo orden por índice)
+  // Imágenes opcionales (1 por servicio, en el mismo orden que arriba)
   const serviceImages = [
-    '/servicios/pavimento.jpg',
-    '/servicios/andenes.jpg',
     '/servicios/placa-huella.jpg',
+    '/servicios/driveway.png',
+    '/servicios/andenes.jpg',
+    '/servicios/patios.jpg',
+    '/servicios/curve.jpg',
+    '/servicios/stamp.jpg',
+    '/servicios/crack.jpg',
+    '/servicios/seal.jpg',
+    '/servicios/pothole.jpg',
+    '/servicios/asphalt.jpg',
     '/servicios/pisos.jpg',
+    '/servicios/parking.jpg',
+    '/servicios/pavimento.jpg',
+
   ];
 
   // Auto-advance slides
@@ -52,7 +53,7 @@ export default function Services() {
     return () => clearInterval(id);
   }, [services.length]);
 
-  // Calcular slides por viewport (sin leer window en SSR)
+  // Responsive slides
   useEffect(() => {
     const compute = () => {
       const w = window.innerWidth;
@@ -64,10 +65,7 @@ export default function Services() {
   }, []);
 
   const getVisibleIndices = () =>
-    Array.from(
-      { length: slidesToShow },
-      (_, i) => (currentSlide + i) % services.length,
-    );
+    Array.from({ length: slidesToShow }, (_, i) => (currentSlide + i) % services.length);
 
   return (
     <section id="services" className="py-16 px-4 bg-gray-50">
@@ -76,13 +74,9 @@ export default function Services() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-6 flex justify-center items-center gap-2 text-[#0D0D0D]">
             <Cog className="text-[#D6A52F]" size={28} />
-            Our Services
+            {messages.services.title}
           </h2>
           <div className="w-16 h-0.5 rounded-full mb-10 mx-auto bg-[#D6A52F]" />
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Professional concrete solutions for residential and commercial
-            projects throughout Colorado.
-          </p>
         </div>
 
         {/* Carousel */}
@@ -92,16 +86,13 @@ export default function Services() {
               {getVisibleIndices().map((idx) => {
                 const service = services[idx];
                 const Icon = service.icon;
-                const imgSrc =
-                  serviceImages[idx] ??
-                  serviceImages[idx % serviceImages.length];
+                const imgSrc = serviceImages[idx] ?? '/servicios/default.jpg';
 
                 return (
                   <article
-                    key={`${service.title}-${idx}`}
+                    key={`${service.key}-${idx}`}
                     className="flex-1 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:scale-[1.02]"
                   >
-                    {/* Imagen SIN título/ícono encima */}
                     <div className="relative w-full h-48">
                       <Image
                         src={imgSrc}
@@ -112,18 +103,12 @@ export default function Services() {
                         className="object-cover"
                       />
                     </div>
-
-                    {/* Content */}
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2 text-[#0D0D0D]">
                         <Icon size={18} className="text-[#D6A52F]" />
-                        <h3 className="text-lg font-semibold">
-                          {service.title}
-                        </h3>
+                        <h3 className="text-lg font-semibold">{service.title}</h3>
                       </div>
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {service.description}
-                      </p>
+                      <p className="text-sm text-gray-600 leading-relaxed">{service.description}</p>
                     </div>
                   </article>
                 );
@@ -132,7 +117,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Pagination Dots */}
+        {/* Pagination */}
         <div className="flex justify-center mt-8 gap-2">
           {services.map((_, index) => (
             <button
@@ -142,33 +127,9 @@ export default function Services() {
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentSlide ? 'scale-125' : 'hover:bg-gray-400'
               }`}
-              style={{
-                backgroundColor: index === currentSlide ? '#D6A52F' : '#d1d5db',
-              }}
+              style={{ backgroundColor: index === currentSlide ? '#D6A52F' : '#d1d5db' }}
             />
           ))}
-        </div>
-
-        {/* Arrows */}
-        <div className="hidden md:flex justify-center mt-6 gap-4">
-          <button
-            onClick={() =>
-              setCurrentSlide(
-                (prev) => (prev - 1 + services.length) % services.length,
-              )
-            }
-            className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all duration-300 border text-[#D6A52F] border-[#D6A52F]"
-          >
-            Previous
-          </button>
-          <button
-            onClick={() =>
-              setCurrentSlide((prev) => (prev + 1) % services.length)
-            }
-            className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-all duration-300 border text-[#D6A52F] border-[#D6A52F]"
-          >
-            Next
-          </button>
         </div>
       </div>
     </section>

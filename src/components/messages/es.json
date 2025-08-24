@@ -1,10 +1,10 @@
 {
   "hero": {
     "name": "MT",
-    "title": "Cimientos fuertes para futuros firmes",
+    "title": "Bases sólidas para futuros firmes",
     "subtitle": "CONSTRUCTION LLC",
     "description": "Garantía de calidad en cada proyecto",
-    "cta": "Solicita una cotización"
+    "cta": "Solicitar una cotización"
   },
   "navbar": {
     "links": {
@@ -12,7 +12,7 @@
       "about": "Sobre Nosotros",
       "testimonials": "Testimonios",
       "whyUs": "¿Por qué elegirnos?",
-      "contact": "¡Contáctanos!"
+      "contact": "Contáctanos"
     },
     "buttons": {
       "language": "ES / EN",
@@ -21,24 +21,19 @@
   },
   "services": {
     "title": "Nuestros Servicios",
-    "items": [
-      {
-        "title": "Pavimentos de Concreto",
-        "description": "Construcción de pavimentos resistentes y duraderos para vías, parqueaderos y zonas industriales."
-      },
-      {
-        "title": "Andenes Urbanos",
-        "description": "Diseño y construcción de andenes accesibles, estéticos y seguros para la ciudad."
-      },
-      {
-        "title": "Placas Huella",
-        "description": "Soluciones eficientes para caminos rurales y zonas de difícil acceso."
-      },
-      {
-        "title": "Pisos Industriales",
-        "description": "Pisos de alta resistencia ideales para bodegas, fábricas y talleres."
-      }
-    ]
+    "concrete": { "title": "Concreto", "description": "Trabajo de concreto de alta calidad para cualquier tipo de proyecto." },
+    "driveways": { "title": "Entradas de Vehículos", "description": "Entradas duraderas y elegantes construidas para perdurar." },
+    "sidewalks": { "title": "Banquetas", "description": "Banquetas seguras y funcionales para áreas residenciales y comerciales." },
+    "patios": { "title": "Patios", "description": "Patios personalizados que combinan estética y durabilidad." },
+    "curves": { "title": "Bordillos", "description": "Soluciones de concreto para bordillos adaptados a cualquier diseño." },
+    "stampedConcrete": { "title": "Concreto Estampado", "description": "Concreto decorativo estampado para un acabado elegante." },
+    "crackFilling": { "title": "Relleno de Grietas", "description": "Mantenimiento y reparación de superficies agrietadas." },
+    "sealCoating": { "title": "Sellado", "description": "Protección y sellado para pavimentos de larga duración." },
+    "potholeRepair": { "title": "Reparación de Baches", "description": "Reparación rápida y efectiva de baches en calles y estacionamientos." },
+    "asphaltPaving": { "title": "Pavimentación Asfáltica", "description": "Servicios completos de pavimentación asfáltica con materiales de primera." },
+    "flatWork": { "title": "Concreto Plano", "description": "Concreto liso y nivelado para pisos industriales y comerciales." },
+    "parkingLot": { "title": "Estacionamientos", "description": "Construcción y reparación de estacionamientos funcionales y duraderos." },
+    "steeping": { "title": "Escaleras", "description": "Diseño y construcción de escaleras seguras y resistentes." }
   },
   "mobileDrawer": {
     "menuTitle": "Menú",
@@ -50,35 +45,98 @@
   "concreteMixer": {
     "title": "¿Por qué elegirnos?",
     "items": [
-      "Compromiso real y cumplimiento en cada proyecto.",
-      "Concreto de alta calidad con estándares constantes.",
-      "Servicio personalizado y cobertura en cualquier sector."
+      "Compromiso real y confiabilidad en cada proyecto.",
+      "Concreto de alta calidad con estándares consistentes.",
+      "Atención personalizada y cobertura en Colorado."
     ]
   },
   "testimonials": {
-  "title": "Lo que dicen nuestros clientes",
-  "items": [
-    {
-      "message": "Excelente trabajo en nuestro pavimento industrial. Mario y su equipo son profesionales de primera.",
-      "name": "James Carter",
-      "profession": "Operations Manager, Denver"
-    },
-    {
-      "message": "Los andenes quedaron perfectos. Cumplieron con todos los estándares de calidad y a tiempo.",
-      "name": "Laura Mitchell",
-      "profession": "Infrastructure Director, Colorado Springs"
-    },
-    {
-      "message": "Muy satisfecho con el trabajo en concreto. Recomiendo totalmente sus servicios.",
-      "name": "David Miller",
-      "profession": "Property Owner, Boulder"
-    }
-  ]
-},
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "items": [
+      {
+        "message": "Excelente trabajo en nuestro pavimento industrial. Mario y su equipo son grandes profesionales.",
+        "name": "James Carter",
+        "profession": "Gerente de Operaciones, Denver"
+      },
+      {
+        "message": "Las banquetas quedaron perfectas. Cumplieron con todos los estándares de calidad y en el tiempo acordado.",
+        "name": "Laura Mitchell",
+        "profession": "Directora de Infraestructura, Colorado Springs"
+      },
+      {
+        "message": "Muy satisfecho con el trabajo de concreto. Recomiendo totalmente sus servicios.",
+        "name": "David Miller",
+        "profession": "Propietario, Boulder"
+      }
+    ]
+  },
   "serviceArea": {
-    "title": "Nuestra área de servicio",
-    "description": "Actualmente, servimos con orgullo únicamente en Colorado. Nuestros proyectos están ubicados en Denver, Boulder, Colorado Springs, Fort Collins y áreas cercanas. Para clientes fuera del estado, no ofrecemos servicios en este momento.",
+    "title": "Nuestra Área de Servicio",
+    "description": "Actualmente servimos con orgullo únicamente en Colorado. Nuestros proyectos están ubicados en Denver, Boulder, Colorado Springs, Fort Collins y áreas cercanas. No ofrecemos servicios fuera del estado.",
     "mapPopup": "Operamos solo en Colorado"
+  },
+  "contact": {
+  "title": "Contáctenos",
+  "subtitle": "Comuníquese hoy y mejoraremos sus estimados con las mejores soluciones en concreto.",
+  "contactForm": "Formulario de Contacto",
+  "direct": "Contacto Directo",
+  "services": [
+    "Instalación de Concreto",
+    "Reparación de Entradas",
+    "Construcción de Patios",
+    "Cimentaciones",
+    "Concreto Decorativo",
+    "Otro"
+  ],
+  "methods": [
+    {
+      "id": "phone",
+      "title": "Llámenos",
+      "subtitle": "Soporte telefónico directo",
+      "contact": "+1 (303) 123-4567",
+      "secondary": "+1 (720) 987-6543",
+      "action": "tel:+13031234567",
+      "color": "gold",
+      "available": "24/7"
+    },
+    {
+      "id": "email",
+      "title": "Escríbanos",
+      "subtitle": "Cotizaciones e información detallada",
+      "contact": "info@mtconcrete.com",
+      "secondary": "quotes@mtconcrete.com",
+      "action": "mailto:info@mtconcrete.com",
+      "color": "black",
+      "available": "Respuesta en 2-4 horas"
+    },
+    {
+      "id": "whatsapp",
+      "title": "WhatsApp",
+      "subtitle": "Atención rápida por chat",
+      "contact": "+1 (303) 123-4567",
+      "action": "https://wa.me/13031234567",
+      "color": "green",
+      "available": "Lun-Dom 7AM-10PM"
+    }
+  ],
+  "quickinfo": {
+  "title": "Información Rápida",
+  "responseTime": "Tiempo de Respuesta",
+  "within": "entre 2 - 4 horas",
+  "serviceArea": "Área de Servicio",
+  "colorado": "Todo Colorado",
+  "freeEstimate": "Cotización Gratis",
+  "always": "Siempre incluido"
+},
+  "whychooseus": {
+  "title": "¿Por qué elegirnos?",
+  "items": {
+    "fir":"Más de 15 años de experiencia",
+    "sec":"Licenciados y asegurados",
+    "thir":"Más de 500 clientes satisfechos",
+    "four":"Garantía de por vida"
   }
+}
 
+}
 }
